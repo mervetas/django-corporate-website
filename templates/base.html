@@ -1,0 +1,417 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Spider Metal{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Tüm ortak stiller buraya */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #0b0b25;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: rgba(11, 11, 37, 0.9); /* Yarı saydam koyu arkaplan */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+        }
+
+        .logo {
+            display: inline-block;
+            text-align: center;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            text-decoration: none;
+        }
+
+        .spider {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            letter-spacing: 0.35em;
+            color: white;
+            display: block;
+        }
+
+        .metal {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.8em;
+            color: #C5A976;
+            display: block;
+            margin-top: 6px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #c4a14c;
+            color: black;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #0b0b25;
+            border-radius: 10px;
+            padding: 10px 0;
+            min-width: 180px;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 8px 14px;
+            white-space: nowrap;
+            border-radius: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .call-btn {
+            background-color: #c4a14c;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Ana içerik alanı - header yüksekliği kadar boşluk bırakır */
+        main {
+            padding-top: 120px;
+            flex: 1 0 auto;
+        }
+
+        /* FOOTER STİLLERİ */
+        footer {
+            background: linear-gradient(to right, #0b0b25, #1a1a3a);
+            color: white;
+            padding: 60px 0 30px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #C5A976;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .footer-col ul li a:hover {
+            color: #C5A976;
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .footer-contact i {
+            color: #C5A976;
+            margin-right: 10px;
+            margin-top: 5px;
+            min-width: 16px;
+        }
+        
+        .footer-contact a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-contact a:hover {
+            color: #C5A976;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background: #C5A976;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: #b8943f;
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 13px;
+            color: #aaa;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 50px !important;   /* biraz daha büyük daire istersen ayarlayabilirsin */
+            height: 50px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #d4af37 !important; /* senin altın rengine yakın */
+            border-radius: 50% !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            font-size: 20px !important; /* ikon boyutu */
+        }
+
+        .social-icons a i {
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1 !important;
+            width: auto !important;
+            height: auto !important;
+            text-align: center !important;
+        }
+
+        
+        .social-icons a:hover {
+            background: #C5A976;
+            color: #000;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            header {
+                padding: 20px 30px;
+            }
+            nav ul {
+                gap: 10px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-contact p {
+                justify-content: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">
+        <span class="spider">SPIDER</span>
+        <span class="metal">METAL</span>
+    </a>
+
+    <nav>
+        <ul>
+            <li><a href="/">Ana Sayfa</a></li>
+            <li class="dropdown">
+                <a href="#hakkimizda">Hakkımızda</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Kalite & Güven</a></li>
+                    <li><a href="#">Referanslar</a></li>
+                </ul> 
+            </li>
+            <li class="dropdown">
+                <a href="#">Hizmetlerimiz</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Projelerimiz</a></li>
+                    <li><a href="#">Teklif Al</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'blog_listesi' %}">Blog</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+    </nav>
+    <a href="tel:+905551112233" class="call-btn">📞 Bizi Arayın</a>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h4>{{ footer_ayarlari.baslik }}</h4>
+            <ul>
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="#hakkimizda">Hakkımızda</a></li>
+                <li><a href="#">Hizmetlerimiz</a></li>
+                <li><a href="{% url 'blog_listesi' %}">Blog</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-col">
+            <h4>Hizmetler</h4>
+            <ul>
+                <li><a href="#">Projelerimiz</a></li>
+                <li><a href="#">Kalite & Güvenlik</a></li>
+                <li><a href="#">Referanslar</a></li>
+                <li><a href="#">Teklif Al</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-col">
+            <h4>Destek</h4>
+            <ul>
+                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                <li><a href="#">Gizlilik Politikası</a></li>
+                <li><a href="#">Kullanım Şartları</a></li>
+                <li><a href="#">Çerez Politikası</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-col footer-contact">
+    <h4>İletişim</h4>
+    <p><i class="fas fa-map-marker-alt"></i> {{ footer_ayarlari.adres }}</p>
+    <p><i class="fas fa-phone"></i> {{ footer_ayarlari.telefon }}</p>
+    <p><i class="fab fa-whatsapp"></i> {{ footer_ayarlari.whatsapp }}</p>
+    <p><i class="fas fa-envelope"></i> <a href="mailto:{{ footer_ayarlari.email }}">{{ footer_ayarlari.email }}</a></p>
+    <a href="tel:{{ footer_ayarlari.telefon|cut:' ' }}" class="contact-btn">Bizi Arayın</a>
+    
+    <div class="social-icons">
+        {% if footer_ayarlari.facebook_url %}
+        <a href="{{ footer_ayarlari.facebook_url }}" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        {% endif %}
+        {% if footer_ayarlari.twitter_url %}
+        <a href="{{ footer_ayarlari.twitter_url }}" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+        {% endif %}
+        {% if footer_ayarlari.instagram_url %}
+        <a href="{{ footer_ayarlari.instagram_url }}" target="_blank">
+            <i class="fab fa-instagram"></i>
+        </a>
+        {% endif %}
+        {% if footer_ayarlari.linkedin_url %}
+        <a href="{{ footer_ayarlari.linkedin_url }}" target="_blank">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        {% endif %}
+    </div>
+</div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>{{ footer_ayarlari.telif_hakki }}</p>
+    </div>
+</footer>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

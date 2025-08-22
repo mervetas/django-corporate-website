@@ -1,0 +1,72 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+from .forms import IletisimForm
+from .models import Slider, GaleriGorsel, Istatistik, IstatistikArkaplan, Blog, IletisimMesaji
+
+def index(request):
+    sliderlar = Slider.objects.filter(aktif=True).order_by('-tarih')  # En yeniler üstte
+    gorseller = GaleriGorsel.objects.all()
+    istatistikler = Istatistik.objects.all()
+    arkaplan = IstatistikArkaplan.objects.filter(aktif=True).first()
+    return render(request, 'anasayfa/index.html', {
+        'sliderlar': sliderlar,
+        'gorseller': gorseller,
+        'istatistikler': istatistikler,
+        'istatistik_arkaplan': arkaplan
+    })
+
+def blog_listesi(request):
+    bloglar = Blog.objects.filter(aktif=True).order_by('-yayin_tarihi')
+    
+    return render(request, 'blog/blog_listesi.html', {
+        'bloglar': bloglar
+    })
+
+def blog_detay(request, slug):
+    blog = get_object_or_404(Blog, slug=slug, aktif=True)
+    
+    return render(request, 'blog/blog_detay.html', {
+        'blog': blog
+    })
+
+def iletisim_gonder(request):
+    if request.method == 'POST':
+        form = IletisimForm(request.POST)
+        if form.is_valid():
+            # Formu kaydet
+            mesaj = form.save()
+            
+            # E-posta gönder (opsiyonel)
+            try:
+                send_mail(
+                    f'Yeni İletişim Mesajı - {mesaj.ad} {mesaj.soyad}',
+                    f'''
+                    Yeni bir iletişim formu dolduruldu:
+                    
+                    Ad: {mesaj.ad}
+                    Soyad: {mesaj.soyad}
+                    E-posta: {mesaj.email}
+                    Telefon: {mesaj.telefon}
+                    Mesaj: {mesaj.mesaj}
+                    
+                    Tarih: {mesaj.olusturulma_tarihi}
+                    ''',
+                    settings.DEFAULT_FROM_EMAIL,
+                    ['sizin@email.com'],  # Bildirim alacak email
+                    fail_silently=True,
+                )
+            except Exception as e:
+                print(f"E-posta gönderilemedi: {e}")
+            
+            # Başarılı mesajı
+            messages.success(request, 'Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.')
+            return redirect(reverse('index') + '#iletisim')
+        else:
+            messages.error(request, 'Lütfen formu doğru şekilde doldurun.')
+            return redirect(reverse('index') + '#iletisim')
+    
+    # GET isteği durumunda ana sayfaya yönlendir
+    return redirect(reverse('index') + '#iletisim')
