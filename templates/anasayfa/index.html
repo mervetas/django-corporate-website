@@ -385,7 +385,7 @@
     }
 
 
-
+/* Tablet */
     @media (max-width: 992px) {
         .about-section {
             padding: 80px 40px !important;
@@ -401,7 +401,13 @@
         }
         .showcase-inner {
             grid-template-columns: 1fr !important;
-            text-align: center;
+            gap: 30px !important;
+            text-align: center !important;
+        }
+        
+        .showcase-left h3 {
+            font-size: 42px !important;
+            line-height: 1.2 !important;
         }
         .istatistik-container {
             flex-direction: column;
@@ -415,6 +421,7 @@
         }
     }
 
+    /* Mobil */
     @media (max-width: 768px) {
         .hero {
             height: 70vh; /* Daha kısa yükseklik */
@@ -482,8 +489,32 @@
             font-size: 15px !important;
             line-height: 1.7 !important;
         }
+        .showcase-section {
+            padding: 60px 15px !important;
+        }
+        
+        .showcase-inner {
+            gap: 25px !important;
+        }
+        
+        .showcase-left h4 {
+            font-size: 14px !important;
+            margin-bottom: 12px !important;
+        }
+        
+        .showcase-left h3 {
+            font-size: 36px !important;
+            line-height: 1.15 !important;
+            margin-bottom: 15px !important;
+        }
+        
+        .showcase-btn {
+            padding: 10px 16px !important;
+            font-size: 14px !important;
+        }
     }
 
+    /* Küçük Mobil */
     @media (max-width: 480px) {
         .hero {
             height: 60vh;
@@ -535,6 +566,26 @@
         .about-text p {
             font-size: 14px !important;
             line-height: 1.6 !important;
+        }
+        .showcase-section {
+            padding: 50px 10px !important;
+        }
+        
+        .showcase-left h3 {
+            font-size: 28px !important;
+        }
+        
+        .showcase-left h4 {
+            font-size: 13px !important;
+        }
+        
+        .showcase-btn {
+            padding: 8px 14px !important;
+            font-size: 13px !important;
+        }
+        
+        .showcase-right img {
+            border-radius: 4px !important;
         }
     }
 </style>
