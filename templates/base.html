@@ -3,6 +3,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Spider Metal{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -123,6 +124,14 @@
             text-decoration: none;
             color: black;
             font-weight: bold;
+        }
+
+        /* Hamburger menü varsayılan gizli */
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
         }
 
         /* Ana içerik alanı - header yüksekliği kadar boşluk bırakır */
@@ -300,6 +309,37 @@
                 justify-content: center;
             }
         }
+        /* Mobilde düzenleme */
+        @media (max-width: 768px) {
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(11,11,37,0.95);
+                display: none;
+                flex-direction: column;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                padding: 20px 0;
+            }
+            nav ul li {
+                text-align: center;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .desktop-call {
+                display: none;
+            }
+            .mobile-call {
+                display: block;
+                margin-top: 10px;
+            }
+        }
+        
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -311,7 +351,12 @@
         <span class="metal">METAL</span>
     </a>
 
-    <nav>
+    <!-- Hamburger menü ikonu -->
+    <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <nav id="navbar">
         <ul>
             <li><a href="/">Ana Sayfa</a></li>
             <li class="dropdown">
@@ -332,8 +377,11 @@
             <li><a href="#iletisim">İletişim</a></li>
         </ul>
     </nav>
-    <a href="tel:+905551112233" class="call-btn">📞 Bizi Arayın</a>
+
+    <!-- Masaüstünde gözükecek buton -->
+    <a href="tel:+905551112233" class="call-btn desktop-call">📞 Bizi Arayın</a>
 </header>
+
 
 <main>
     {% block content %}
@@ -413,5 +461,15 @@
 </footer>
 
 {% block extra_js %}{% endblock %}
+
+<script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const navbar = document.getElementById("navbar");
+
+    menuToggle.addEventListener("click", () => {
+        navbar.style.display = navbar.style.display === "flex" ? "none" : "flex";
+    });
+</script>
+
 </body>
 </html>
