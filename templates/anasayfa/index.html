@@ -405,10 +405,104 @@
             padding: 30px 20px;
         }
     }
+
+    @media (max-width: 768px) {
+        .hero {
+            height: 70vh; /* Daha kısa yükseklik */
+            padding-bottom: 60px;
+        }
+
+        .hero-text {
+            left: 20px !important;
+            right: 20px;
+            text-align: center;
+            transform: translateY(-40%);
+        }
+
+        .details-btn {
+            /* Mevcut stilleri koru */
+            margin-top: 250px !important;
+            padding: 12px 24px !important;
+            font-size: 14px !important;
+            
+            /* Sola konumlandır */
+            position: relative !important;
+            left: 0 !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            display: block !important;
+            width: fit-content !important;
+        }
+
+        .slider-nav {
+            bottom: 30px !important;
+            left: 50% !important;
+            transform: translateX(-50%);
+            gap: 15px;
+        }
+
+        .slider-nav button {
+            padding: 6px 10px;
+            font-size: 16px;
+        }
+
+        #slider-count {
+            font-size: 14px;
+        }
+
+        #scrollBtn {
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+        }
+
+        #scrollIcon {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero {
+            height: 60vh;
+        }
+
+        .hero-text {
+            left: 15px !important;
+            right: 15px;
+        }
+
+        .details-btn {
+            margin-top: 150px !important;
+            padding: 10px 20px !important;
+            font-size: 13px !important;
+            position: relative !important;
+            left: 0 !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            display: block !important;
+            width: fit-content !important;
+        }
+
+        .slider-nav {
+            bottom: 20px !important;
+            gap: 10px;
+        }
+
+        .slider-nav button {
+            padding: 5px 8px;
+            font-size: 14px;
+        }
+
+        #slider-count {
+            font-size: 12px;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+<!-- Slider -->
 <section class="hero" id="hero">
     {% for slider in sliderlar %}
         <div class="hero-slide {% if forloop.first %}active{% endif %}" style="background-image: url('{{ slider.gorsel.url }}');">
