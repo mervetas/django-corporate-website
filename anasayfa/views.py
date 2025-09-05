@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
 from .forms import IletisimForm
-from .models import Slider, GaleriGorsel, Istatistik, IstatistikArkaplan, Blog, IletisimMesaji
+from .models import Slider, GaleriGorsel, Istatistik, IstatistikArkaplan, Blog, IletisimMesaji, Proje
 
 def index(request):
     sliderlar = Slider.objects.filter(aktif=True).order_by('-tarih')  # En yeniler üstte
@@ -70,3 +70,7 @@ def iletisim_gonder(request):
     
     # GET isteği durumunda ana sayfaya yönlendir
     return redirect(reverse('index') + '#iletisim')
+
+def projeler(request):
+    projeler_listesi = Proje.objects.all()
+    return render(request, "projeler/projeler.html", {"projeler": projeler_listesi})

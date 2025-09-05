@@ -121,6 +121,20 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse('blog_detay', kwargs={'slug': self.slug})
     
+#Projelerimiz
+
+class Proje(models.Model):
+    baslik = models.CharField(max_length=200)
+    aciklama = models.TextField(blank=True, null=True)
+    resim = models.ImageField(upload_to="projeler/")  # media/projeler içine yüklenir
+    olusturulma_tarihi = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-olusturulma_tarihi"]
+
+    def __str__(self):
+        return self.baslik
+    
 #Footer
     
 class FooterAyarlari(models.Model):

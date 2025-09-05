@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Slider, About, GaleriGorsel, Showcase, Istatistik, IstatistikArkaplan, Blog, FooterAyarlari, IletisimMesaji
+from .models import Slider, About, GaleriGorsel, Showcase, Istatistik, IstatistikArkaplan, Blog, Proje, FooterAyarlari, IletisimMesaji
 
 @admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
@@ -64,6 +64,11 @@ class BlogAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height:50px; max-width:50px; border-radius:4px;" />', obj.kapak_resmi.url)
         return "-"
     kapak_resmi_onizleme.short_description = 'Kapak Resmi'
+
+@admin.register(Proje)
+class ProjeAdmin(admin.ModelAdmin):
+    list_display = ("baslik", "olusturulma_tarihi")
+    search_fields = ("baslik", "aciklama")
 
 @admin.register(FooterAyarlari)
 class FooterAyarlariAdmin(admin.ModelAdmin):
