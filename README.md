@@ -40,6 +40,9 @@ A modern, responsive corporate website built with Django featuring dynamic conte
 - **Image Optimization** - Pillow integration
 - **MySQL Database** - Robust data storage
 - **Turkish Language Support** - Localized content
+- **Base Template** - Shared header/footer with embedded global styles
+- **Template Inheritance** - DRY principle using {% extends %} and {% block %}
+- **Page-Specific Assets** - Individual CSS/JS per template for optimal loading
 
 ## 🚀 Quick Start
 
@@ -103,29 +106,36 @@ Admin Panel: http://127.0.0.1:8000/admin
 📁 Project Structure
 text
 django-corporate-website/
-├── spidermetal/              # Main project settings
-│   ├── settings.py           # Django settings
-│   ├── urls.py               # Main URL routing
-│   └── wsgi.py               # WSGI configuration
-├── anasayfa/                 # Main application (Turkish: homepage)
-│   ├── models.py             # Database models
-│   ├── views.py              # View functions
-│   ├── admin.py              # Admin panel configuration
-│   ├── urls.py               # App URL routing
-│   └── templates/            # HTML templates
-│       ├── base.html         # Base template
-│       ├── index.html        # Homepage
-│       ├── about.html        # About page
-│       ├── blog.html         # Blog page
-│       ├── projects.html     # Projects page
-│       └── contact.html      # Contact page
-├── static/                   # CSS, JavaScript, images
-│   ├── css/                  # Stylesheets
-│   ├── js/                   # JavaScript files
-│   └── images/               # Static images
-├── media/                    # User-uploaded files
-├── templates/                # Base templates
-└── requirements.txt          # Python dependencies
+├── spidermetal/ # Main project settings
+│ ├── settings.py # Django settings
+│ ├── urls.py # Main URL routing
+│ └── wsgi.py # WSGI configuration
+├── anasayfa/ # Main application
+│ ├── models.py # Database models
+│ ├── views.py # View functions
+│ ├── admin.py # Admin panel configuration
+│ ├── urls.py # App URL routing
+│ ├── forms.py # Contact forms
+│ ├── context_processors.py # Global context processors
+│ └── apps.py # App configuration
+├── templates/ # ALL templates
+│ ├── anasayfa/
+│ │ └── index.html # Homepage (extends base.html)
+│ ├── blog/
+│ │ ├── blog_detay.html # Blog detail page (extends base.html)
+│ │ └── blog_listesi.html # Blog list page (extends base.html)
+│ ├── projeler/
+│ │ └── proje.html # Projects page (extends base.html)
+│ └── base.html # Base template with header/footer
+├── static/ # CSS, JavaScript, images
+├── media/ # User-uploaded files
+│ ├── about/ # About section images
+│ ├── blog/ # Blog post images
+│ ├── projeler/ # Project images
+│ ├── slider/ # Slider images
+│ └── galeri/ # Gallery images
+└── requirements.txt # Python dependencies
+
 🛠️ Admin Panel Usage
 Accessing Admin Panel
 Create superuser: python manage.py createsuperuser
