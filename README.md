@@ -52,15 +52,14 @@ A modern, responsive corporate website built with Django featuring dynamic conte
 - MySQL 5.7+ 
 - pip (Python package manager)
 
-### Installation Steps
-
-1. **Clone the repository:**
+Installation Steps
+1-Clone the repository:
 ```bash
 git clone https://github.com/yourusername/django-corporate-website.git
 cd django-corporate-website
-Create and activate virtual environment:
-
-bash
+```
+2-Create and activate virtual environment:
+```bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
@@ -68,40 +67,44 @@ venv\Scripts\activate
 # macOS/Linux
 python -m venv venv
 source venv/bin/activate
-Install dependencies:
-
-bash
+```
+3-Install dependencies:
+```bash
 pip install -r requirements.txt
-
-# Setup Database with Sample Data:
+```
+4-Setup Database with Sample Data:
+```bash
+# Create database
 mysql -u root -e "CREATE DATABASE spidermetal_db;"
+
+# Import sample data
 mysql -u root spidermetal_db < database/dump.sql
-
-bash
-# Copy and edit .env file
+```
+5-Configure environment variables:
+```bash
 cp .env.example .env
-Run database migrations:
-
-bash
+```
+6-Run database migrations:
+```bash
 python manage.py migrate
-Collect static files:
-
-bash
+```
+7-Collect static files:
+```bash
 python manage.py collectstatic
-Create superuser (optional):
-
-bash
+```
+8-Create superuser (optional):
+```bash
 python manage.py createsuperuser
-Start development server:
-
-bash
+```
+9-Start development server:
+```bash
 python manage.py runserver
-Access the application:
-
+```
+10-Access the application:
+```bash
 Website: http://127.0.0.1:8000
-
 Admin Panel: http://127.0.0.1:8000/admin
-
+```
 📁 Project Structure
 text
 django-corporate-website/
@@ -157,15 +160,18 @@ Contact Messages: View submitted contact forms
 
 🔧 Development
 Creating Migrations
-bash
+```bash
 python manage.py makemigrations
 python manage.py migrate
+```
 Running Tests
-bash
+```bash
 python manage.py test
+```
 Static Files Development
-bash
+```bash
 python manage.py collectstatic --noinput
+```
 🌐 Production Deployment
 Key Steps for Production
 Set DEBUG = False in settings
