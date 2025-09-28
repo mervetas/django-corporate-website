@@ -56,7 +56,7 @@ Installation Steps
 
 1-Clone the repository:
 ```bash
-git clone https://github.com/yourusername/django-corporate-website.git
+git clone https://github.com/mervetas/django-corporate-website.git
 cd django-corporate-website
 ```
 2-Create and activate virtual environment:
@@ -130,6 +130,8 @@ django-corporate-website/
 │ ├── projeler/
 │ │ └── proje.html # Projects page (extends base.html)
 │ └── base.html # Base template with header/footer
+├── database/ # Sample database
+│ └── dump.sql # Database dump with sample data
 ├── media/ # User-uploaded files
 │ ├── about/ # About section images
 │ ├── blog/ # Blog post images
