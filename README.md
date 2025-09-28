@@ -127,7 +127,6 @@ django-corporate-website/
 │ ├── projeler/
 │ │ └── proje.html # Projects page (extends base.html)
 │ └── base.html # Base template with header/footer
-├── static/ # CSS, JavaScript, images
 ├── media/ # User-uploaded files
 │ ├── about/ # About section images
 │ ├── blog/ # Blog post images
