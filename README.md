@@ -102,12 +102,12 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 10-Access the application:
-```bash
+
 Website: http://127.0.0.1:8000
 Admin Panel: http://127.0.0.1:8000/admin
-```
+
 📁 Project Structure
-text
+```text
 django-corporate-website/
 ├── spidermetal/ # Main project settings
 │ ├── settings.py # Django settings
@@ -137,7 +137,7 @@ django-corporate-website/
 │ ├── slider/ # Slider images
 │ └── galeri/ # Gallery images
 └── requirements.txt # Python dependencies
-
+```
 🛠️ Admin Panel Usage
 Accessing Admin Panel
 Create superuser: python manage.py createsuperuser
