@@ -72,11 +72,10 @@ Install dependencies:
 
 bash
 pip install -r requirements.txt
-Create MySQL database:
 
-sql
-CREATE DATABASE spidermetal_db;
-Configure environment variables:
+# Setup Database with Sample Data:
+mysql -u root -e "CREATE DATABASE spidermetal_db;"
+mysql -u root spidermetal_db < database/dump.sql
 
 bash
 # Copy and edit .env file
