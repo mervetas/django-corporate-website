@@ -21,9 +21,9 @@ from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security (DEVELOPMENT ONLY - PRODUCTION'DA DEĞİŞTİRİN!)
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key-for-dev')
-DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+SECRET_KEY = 'django-insecure-!zq!yf1!1*9n+!5@lnaycym2nde2akofzmswn#qm5+bp+(kag1'
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Apps
 INSTALLED_APPS = [
