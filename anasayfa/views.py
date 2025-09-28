@@ -7,7 +7,7 @@ from .forms import IletisimForm
 from .models import Slider, GaleriGorsel, Istatistik, IstatistikArkaplan, Blog, IletisimMesaji, Proje
 
 def index(request):
-    sliderlar = Slider.objects.filter(aktif=True).order_by('-tarih')  # En yeniler üstte
+    sliderlar = Slider.objects.filter(aktif=True).order_by('-tarih') # Newest first (descending order)
     gorseller = GaleriGorsel.objects.all()
     istatistikler = Istatistik.objects.all()
     arkaplan = IstatistikArkaplan.objects.filter(aktif=True).first()
@@ -36,10 +36,10 @@ def iletisim_gonder(request):
     if request.method == 'POST':
         form = IletisimForm(request.POST)
         if form.is_valid():
-            # Formu kaydet
+            # Save the form
             mesaj = form.save()
             
-            # E-posta gönder (opsiyonel)
+            # Send email (optional)
             try:
                 send_mail(
                     f'Yeni İletişim Mesajı - {mesaj.ad} {mesaj.soyad}',
@@ -55,20 +55,20 @@ def iletisim_gonder(request):
                     Tarih: {mesaj.olusturulma_tarihi}
                     ''',
                     settings.DEFAULT_FROM_EMAIL,
-                    ['sizin@email.com'],  # Bildirim alacak email
+                    ['spidermetal@email.com'],  # Notification recipient email
                     fail_silently=True,
                 )
             except Exception as e:
                 print(f"E-posta gönderilemedi: {e}")
             
-            # Başarılı mesajı
+            # Success message
             messages.success(request, 'Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.')
             return redirect(reverse('index') + '#iletisim')
         else:
             messages.error(request, 'Lütfen formu doğru şekilde doldurun.')
             return redirect(reverse('index') + '#iletisim')
     
-    # GET isteği durumunda ana sayfaya yönlendir
+   # Redirect to homepage on GET request
     return redirect(reverse('index') + '#iletisim')
 
 def projeler(request):

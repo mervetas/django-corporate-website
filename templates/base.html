@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Tüm ortak stiller buraya */
+        /* Global common styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
@@ -31,8 +31,8 @@
             align-items: center;
             z-index: 10;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            background-color: rgba(11, 11, 37, 0.9); /* Yarı saydam koyu arkaplan */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+            background-color: rgba(11, 11, 37, 0.9); /* Semi-transparent dark overlay */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Light shadow */
         }
 
         .logo {
@@ -126,7 +126,7 @@
             font-weight: bold;
         }
 
-        /* Hamburger menü varsayılan gizli */
+       /* Hamburger menu - Hidden by default */
         .menu-toggle {
             display: none;
             font-size: 28px;
@@ -134,13 +134,13 @@
             cursor: pointer;
         }
 
-        /* Ana içerik alanı - header yüksekliği kadar boşluk bırakır */
+       /* Main content area - Accounts for header height */
         main {
             padding-top: 120px;
             flex: 1 0 auto;
         }
 
-        /* FOOTER STİLLERİ */
+        /* FOOTER STYLES */
         footer {
             background: linear-gradient(to right, #0b0b25, #1a1a3a);
             color: white;
@@ -259,11 +259,11 @@
             width: 50px !important;   /* biraz daha büyük daire istersen ayarlayabilirsin */
             height: 50px !important;
             background: rgba(255, 255, 255, 0.1) !important;
-            color: #d4af37 !important; /* senin altın rengine yakın */
+            color: #d4af37 !important; /* Gold-like color palette */
             border-radius: 50% !important;
             text-decoration: none !important;
             transition: all 0.3s ease !important;
-            font-size: 20px !important; /* ikon boyutu */
+            font-size: 20px !important; /* Icon size */
         }
 
         .social-icons a i {
@@ -309,7 +309,7 @@
                 justify-content: center;
             }
         }
-        /* Mobilde düzenleme */
+       /* Mobile responsive */
         @media (max-width: 768px) {
             nav {
                 position: absolute;

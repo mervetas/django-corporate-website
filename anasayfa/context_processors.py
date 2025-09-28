@@ -2,7 +2,7 @@ from .models import About, Showcase, FooterAyarlari
 from django.utils import timezone
 
 def global_context(request):
-    # Ana sayfada gösterilmek üzere işaretlenmiş ilk About kaydını al
+    # Get first About record marked for homepage display
     hakkimizda = About.objects.filter(show_on_home=True).order_by('order').first()
     showcase = Showcase.objects.filter(show_on_home=True).order_by('order').first()
     return {
@@ -14,10 +14,10 @@ def footer_ayarlari(request):
     try:
         footer = FooterAyarlari.objects.first()
         if not footer:
-            # İlk kez çalıştırılıyorsa varsayılan değerlerle oluştur
+            # Create with default values if first run
             footer = FooterAyarlari.objects.create()
     except:
-        # Database hatası durumunda boş bir nesne
+        # Return empty object on database error
         class DefaultFooter:
             baslik = "Spider Metal"
             adres = "A. 1649 Sk. No: 61 Turan Mah. Bayraklı - İzmir, Türkiye, 35540"

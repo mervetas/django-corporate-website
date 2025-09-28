@@ -75,7 +75,7 @@ class FooterAyarlariAdmin(admin.ModelAdmin):
     list_display = ['baslik', 'telefon', 'email']
     
     def has_add_permission(self, request):
-        # Sadece bir tane footer ayarı kaydı olsun
+       # Ensure only one footer settings record exists
         if self.model.objects.count() >= 1:
             return False
         return True

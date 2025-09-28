@@ -5,14 +5,14 @@ from django.urls import reverse
 class Slider(models.Model):
     baslik = models.CharField(max_length=100)
     aciklama = models.TextField(blank=True)
-    gorsel = models.ImageField(upload_to='slider/')  # medya klasörü olacak
+    gorsel = models.ImageField(upload_to='slider/')  # Media folder configuration
     aktif = models.BooleanField(default=True)
     tarih = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.baslik
     
-# Hakkımızda 
+# About 
 
 class About(models.Model):
     baslik = models.CharField("Başlık", max_length=200, default="Hakkımızda")
@@ -33,7 +33,7 @@ class About(models.Model):
     def __str__(self):
         return self.baslik
     
-# Hizmetlerimiz Görsel 3 lü block
+#Services Gallery - 3 Column Layout
 
 class GaleriGorsel(models.Model):
     resim = models.ImageField(upload_to='galeri/')
@@ -42,14 +42,14 @@ class GaleriGorsel(models.Model):
     def __str__(self):
         return f"Galeri Görseli #{self.id}"
     
-# Hizmetlerimiz 
+# Services 
     
 class Showcase(models.Model):
     baslik = models.CharField("Başlık", max_length=200, default="Projelerimiz")
     kisa_aciklama = models.TextField("Kısa Açıklama", blank=True)
     gorsel = models.ImageField("Görsel (sağ taraf)", upload_to='showcase/', blank=True, null=True)
     buton_yazi = models.CharField("Buton Yazısı", max_length=50, default="Projeleri Gör")
-    buton_link = models.CharField("Buton Linki", max_length=255, default="/projeler")  # veya URLField
+    buton_link = models.CharField("Buton Linki", max_length=255, default="/projeler")
     arkaplan = models.CharField("Arka plan rengi (hex veya css)", max_length=30, default="#f6f6f6")
     show_on_home = models.BooleanField("Ana sayfada göster", default=True)
     order = models.PositiveIntegerField("Sıra", default=0)
@@ -65,7 +65,7 @@ class Showcase(models.Model):
     def __str__(self):
         return self.baslik
     
-# İstatistik 
+# Statistics
     
 class Istatistik(models.Model):
     baslik = models.CharField('Başlık', max_length=100)
@@ -121,12 +121,12 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse('blog_detay', kwargs={'slug': self.slug})
     
-#Projelerimiz
+#Projects
 
 class Proje(models.Model):
     baslik = models.CharField(max_length=200)
     aciklama = models.TextField(blank=True, null=True)
-    resim = models.ImageField(upload_to="projeler/")  # media/projeler içine yüklenir
+    resim = models.ImageField(upload_to="projeler/") 
     olusturulma_tarihi = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -144,13 +144,13 @@ class FooterAyarlari(models.Model):
     whatsapp = models.CharField(max_length=20, verbose_name="WhatsApp", default="+90 (532) 296 90 00")
     email = models.EmailField(verbose_name="E-posta", default="info@spidermetal.com")
     
-    # Sosyal Medya Linkleri
+    # Social Media Links
     facebook_url = models.URLField(verbose_name="Facebook URL", blank=True, null=True)
     twitter_url = models.URLField(verbose_name="Twitter URL", blank=True, null=True)
     instagram_url = models.URLField(verbose_name="Instagram URL", blank=True, null=True)
     linkedin_url = models.URLField(verbose_name="LinkedIn URL", blank=True, null=True)
     
-    # Footer Metinleri
+    # Footer text
     telif_hakki = models.CharField(max_length=255, verbose_name="Telif Hakkı Metni", 
                                   default="© 2025 Spider Metal. Tüm hakları saklıdır.")
     
@@ -162,13 +162,13 @@ class FooterAyarlari(models.Model):
         return "Footer Ayarları"
     
     def save(self, *args, **kwargs):
-        # Sadece bir tane footer ayarı kaydı olabilir
+        # Only one footer settings record allowed
         if not self.pk and FooterAyarlari.objects.exists():
-            # Zaten bir kayıt varsa, yeni kayıt oluşturma
+            # Do not create new record if one already exists
             return
         super().save(*args, **kwargs)
 
-#İletişim formu
+# Contact Form
 
 class IletisimMesaji(models.Model):
     ad = models.CharField(max_length=100, verbose_name="Ad")

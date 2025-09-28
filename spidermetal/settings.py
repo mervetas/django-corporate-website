@@ -8,7 +8,7 @@ import sys
 import os
 from decouple import config
 
-# MariaDB versiyon kontrolünü atla
+# Skip MariaDB version check
 if 'runserver' in sys.argv or 'migrate' in sys.argv:
     from django.db.backends.mysql.base import DatabaseWrapper
     DatabaseWrapper.check_database_version_supported = lambda self: None
@@ -20,7 +20,7 @@ from django.utils.translation import gettext_lazy as _
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security (DEVELOPMENT ONLY - PRODUCTION'DA DEĞİŞTİRİN!)
+# Security (DEVELOPMENT ONLY - CHANGE IN PRODUCTION!)
 SECRET_KEY = 'django-insecure-!zq!yf1!1*9n+!5@lnaycym2nde2akofzmswn#qm5+bp+(kag1'
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -73,11 +73,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'spidermetal_db',
         'USER': 'root',
-        'PASSWORD': '',  # Gerçek projede .env kullanın!
+        'PASSWORD': '', # Use .env in real projects!
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
-            'charset': 'utf8mb4',  # Türkçe karakter desteği
+            'charset': 'utf8mb4',  # Turkish character support
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
@@ -92,14 +92,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'tr-tr'  # Türkçe için
+LANGUAGE_CODE = 'tr-tr'  # For Turkish language
 TIME_ZONE = 'Europe/Istanbul'
 USE_I18N = True
 USE_TZ = True
 
 # Static & Media Files
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Bu daha taşınabilir bir yol
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
