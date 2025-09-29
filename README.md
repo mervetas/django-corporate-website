@@ -222,7 +222,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 🙏 Acknowledgments
 Django Framework
 
-Bootstrap (if used)
+Bootstrap
 
 jQuery for interactive elements
 
